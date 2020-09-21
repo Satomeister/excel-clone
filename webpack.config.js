@@ -1,5 +1,5 @@
 const path = require('path')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
+const {CleanWebpackPlugin} = require('clean-webpack-plugin')
 const HTMLWebpackPlugin = require('html-webpack-plugin')
 const CopyPlugin = require('copy-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
@@ -17,7 +17,7 @@ const jsLoaders = () => {
                 presets: ['@babel/preset-env']
             }
         }
-    ];
+    ]
 
     if (isDev) {
         loaders.push('eslint-loader')
@@ -72,7 +72,13 @@ module.exports = {
             {
                 test: /\.s[ac]ss$/i,
                 use: [
-                    MiniCssExtractPlugin.loader,
+                    {
+                        loader: MiniCssExtractPlugin.loader,
+                        options: {
+                            hmr: isDev,
+                            reloadAll: true
+                        }
+                    },
                     'css-loader',
                     'sass-loader'
                 ],
@@ -82,7 +88,6 @@ module.exports = {
                 exclude: /node_modules/,
                 use: jsLoaders()
             }
-
         ]
     }
 }
