@@ -11,7 +11,10 @@
     "comma-dangle": "off",
     "indent":  ["error", 4],
     "object-curly-spacing": ["error", "always"],
-    "linebreak-style": [0, "error", "windows"]
+    "linebreak-style": [0, "error", "windows"],
+    "require-jsdoc": "off",
+    "no-debugger": "off",
+    "max-len": ["error", { "code": 100 }]
   },
   "extends": [
     "eslint:recommended", "google"
