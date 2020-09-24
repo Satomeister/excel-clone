@@ -3,23 +3,30 @@ const CODES = {
     Z: 90
 }
 
-function createCol(char) {
+function createCol(char, index) {
     return `
-        <div class="column">${char}</div>
+        <div class="column" data-type="resizable" data-col="${index}">
+            ${char}
+            <div class="col-resizing" data-resize="col"></div>
+        </div>
     `
 }
 
-function createCell() {
+function createCell(_, col) {
     return `
-        <div class="cell" contenteditable=""></div>
+        <div class="cell" data-col="${col}" contenteditable></div>
     `
 }
 
 function createRow(info, content) {
+    const resizing = info ? `<div class="row-resizing" data-resize="row"></div>` : ''
     return `
-        <div class="row">
+        <div class="row" data-type="resizable">
 
-        <div class="row-info">${info || ''}</div>
+        <div class="row-info">
+            ${info || ''}
+            ${resizing}
+        </div>
 
         <div class="row-data">${content}</div>
 
