@@ -25,12 +25,39 @@ class Dom {
         return $(this.$el.closest(selector))
     }
 
+    addClass(className) {
+        this.$el.classList.add(className)
+        return this
+    }
+
+    removeClass(className) {
+        return this.$el.classList.remove(className)
+    }
+
     getCoords() {
         return this.$el.getBoundingClientRect()
     }
 
-    selectAll(selector) {
+    find(selector) {
+        return $(this.$el.querySelector(selector))
+    }
+
+    findAll(selector) {
         return this.$el.querySelectorAll(selector)
+    }
+
+    focus() {
+        this.$el.focus()
+        return this
+    }
+
+    id(parse) {
+        if (parse) {
+            const [row, col] = this.id().split(':')
+            return { row, col }
+        } else {
+            return this.data.id
+        }
     }
 
     get data() {
@@ -39,6 +66,10 @@ class Dom {
 
     get text() {
         return this.$el.textContent.trim()
+    }
+
+    set text(data) {
+        this.$el.textContent = data
     }
 
     clear() {
