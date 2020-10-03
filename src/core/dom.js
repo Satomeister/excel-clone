@@ -51,6 +51,13 @@ class Dom {
         return this
     }
 
+    getStyles(styles = []) {
+        return styles.reduce((res, s) => {
+            res[s] = this.$el.style[s]
+            return res
+        }, {})
+    }
+
     id(parse) {
         if (parse) {
             const [row, col] = this.id().split(':')
@@ -60,12 +67,24 @@ class Dom {
         }
     }
 
+    attr(name, value) {
+        if (value) {
+            this.$el.setAttribute(name, value)
+        } else {
+            this.$el.getAttribute(name)
+        }
+    }
+
     get data() {
         return this.$el.dataset
     }
 
     get text() {
-        return this.$el.textContent.trim()
+        if (this.$el.value) {
+            return this.$el.value
+        } else {
+            return this.$el.textContent.trim()
+        }
     }
 
     set text(data) {
