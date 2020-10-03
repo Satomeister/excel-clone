@@ -6,6 +6,8 @@ export class ExcelComponent extends DOMListener {
         this.name = options.name || ''
         this.emitter = options.emitter
         this.unsubs = []
+        this.store = options.store
+        this.subscribes = options.subscribes || []
     }
 
     toHTML() {
@@ -20,6 +22,16 @@ export class ExcelComponent extends DOMListener {
         const unsub = this.emitter.subscribe(event, callback)
         this.unsubs.push(unsub)
     }
+
+    $dispatch(action) {
+        this.store.dispatch(action)
+    }
+
+    $subscribe(fn) {
+        this.store.subscribe(fn)
+    }
+
+    storeChanged(changes) {}
 
     init() {
         this.initDOMListeners()

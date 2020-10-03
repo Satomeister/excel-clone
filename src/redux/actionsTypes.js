@@ -1,0 +1,6 @@
+export const COL_RESIZE = 'CORL_RESIZE'
+export const ROW_RESIZE = 'ROW_RESIZE'
+export const CELLS_UPDATE = 'CELLS_UPDATE'
+export const CHANGE_STYLES = 'CHANGE_STYLES'
+export const APPLY_STYLES = 'APPLY_STYLES'
+export const CHANGE_TITLE = 'CHANGE_TITLE'

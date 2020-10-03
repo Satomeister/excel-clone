@@ -17,19 +17,19 @@ export function matrix($current, $target) {
 
 export function selector(key, { row, col }) {
     switch (key) {
-    case 'Enter':
-    case 'ArrowDown':
-        row++
-        break
-    case 'Tab':
-    case 'ArrowRight':
-        col++
-        break
-    case 'ArrowLeft':
-        col--
-        break
-    case 'ArrowUp':
-        row--
+        case 'Enter':
+        case 'ArrowDown':
+            row++
+            break
+        case 'Tab':
+        case 'ArrowRight':
+            col++
+            break
+        case 'ArrowLeft':
+            col--
+            break
+        case 'ArrowUp':
+            row--
     }
     return `[data-id="${row}:${col}"]`
 }

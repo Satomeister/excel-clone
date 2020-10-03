@@ -1,6 +1,7 @@
 import { $ } from '@core/dom'
+import { colResize, rowResize } from '@/redux/actions'
 
-export function resizeHandler($root, event) {
+export function resizeHandler($root, event, dispatch) {
     const $resizer = $(event.target)
     const $parent = $resizer.closest('[data-type="resizable"]')
     const parentCoords = $parent.getCoords()
@@ -21,8 +22,6 @@ export function resizeHandler($root, event) {
             const right = -delta + 'px'
             $resizer.css({ right })
         } else {
-            console.log(e.pageY)
-            console.log(e.clientY)
             const delta = e.clientY - parentCoords.bottom
             value = delta + parentCoords.height + 'px'
 
@@ -38,10 +37,12 @@ export function resizeHandler($root, event) {
         if (type === 'col') {
             $root.findAll(`[data-col='${$parent.data.col}']`)
                 .forEach(el => el.style.width = value)
+            dispatch(colResize($parent.data.col, value))
         }
 
         if (type === 'row') {
             $parent.css({ height: value })
+            dispatch(rowResize($parent.data.row, value))
         }
 
         $resizer.css({
