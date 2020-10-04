@@ -10,12 +10,19 @@ const defaultState = {
     stylesData: {}
 }
 
-const normalize = state => ({
-    ...state,
-    currentStyles: defaultStyles,
-    currentText: ''
-})
+function normalize(state) {
+    return {
+        ...state,
+        currentStyles: defaultStyles,
+        currentText: ''
+    }
+}
 
 export const initialState = JSON.parse(localStorage.getItem('excel-state')) ?
     normalize(JSON.parse(localStorage.getItem('excel-state'))) :
     defaultState
+
+
+export function normalizeInitialState(state) {
+    return state ? normalize(JSON.parse(state)) : defaultState
+}
